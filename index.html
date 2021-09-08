@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function upperCaseFirstLetter(str) {
+    return str[0].toUpperCase() + str.substring(1, str.length).toLowerCase()
+}
+
+function computerPlay() {
+    let moves = ["rock", "paper", "scissors"]
+    return moves[Math.floor(Math.random() * 3)]
+}
+
+function playGame(playerSelection, computerSelection) {
+    
+
+    if (
+        (playerSelection == "rock" && computerSelection == "scissors") || 
+        (playerSelection == "paper" && computerSelection == "rock") || 
+        (playerSelection == "scissors" && computerSelection == "paper") ) {
+
+        return  `You Win! ${upperCaseFirstLetter(playerSelection)} beats ${upperCaseFirstLetter(computerSelection)}`
+    } else if (
+        (computerSelection == "rock" &&  playerSelection == "scissors") || 
+        (computerSelection == "paper" &&  playerSelection== "rock") || 
+        (computerSelection == "scissors" &&  playerSelection == "paper") ) {
+
+        return  `You Lose! ${upperCaseFirstLetter(computerSelection)} beats ${upperCaseFirstLetter(playerSelection)}`
+    } else {
+        return "It's a Tie"
+    }
+}
+
+function requestInput() {
+    let playerSelection = prompt("Rock, Paper, Scissor?").toLowerCase()
+    let x = 0
+    do {
+        if ((playerSelection == "rock") || (playerSelection == "paper") || (playerSelection == "scissors")) {
+            x = 1
+            return playerSelection
+        } else {
+            playerSelection = prompt("Your input needs to be: Rock, Paper or Scissors").toLowerCase()
+        }
+    } while(x = 0)
+
+  
+    
+}
+
+function game() {
+    let numberOfGames  = 5
+    let computerWin = 0;
+    let playerWin = 0;
+    for (let i = 0; i < numberOfGames; i++) {
+        let playerSelection = requestInput()
+        
+        let result = playGame(playerSelection, computerPlay())
+        result[4] == "W" ? playerWin++ : result[4] == "L" ? computerWin++ : ""; 
+        console.log(result)
+        
+
+    }
+    console.log(`Player wins: ${playerWin} rounds. Computer Wins: ${computerWin} rounds.`)
+}
+
+
+    </script>
+</body>
+</html>
