@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("rock-paper-scissors.webp");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+button {
+    height: 200px;
+    width: 200px;
+    background-color: rgb(186, 216, 240);
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    color: rgb(138, 84, 146);
+    font-size: 1em;
+    font-family: 'Courier New', Courier, monospace;
+    padding: px;
+    
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+button:disabled {
+    cursor: not-allowed;
+    background-color: black;
+}
+
+p {
+    margin: 10px;
+    color: rgb(61, 39, 65);
+    font-size: 2em;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+
+span#scorePlayer {
+    
+}
+
+i {
+    display: inline;
+    color: rgb(129, 116, 131);
+    font-size: 6em;
+}
+
+.scoreBoard {
+    border: 0px solid black;
+    margin: 0px;
+    display: inline-block;
+    padding: 10px;
+    width: 270px;
+    height: 100px;
+    text-align: center;
+    background-color:rgb(186, 216, 240);
+    border-radius: 5px;
+}
+
+span {
+    display: block;
+    padding: 10px;
+}
+
+#result {
+    background-color: rgb(186, 216, 240);
+    text-align: center;
+    border-radius: 5px;
+    width:550px;
+    border: 1px solid black;
+}
+#textResult {
+    border-bottom: 1px solid black;
+    margin: 0px;
+    height: 2em;
+    line-height: 2em;
+    
+    
+
+}

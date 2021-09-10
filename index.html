@@ -5,59 +5,114 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
+    <div>
+        <button id="rock"><i class="far fa-hand-rock"></i><br>Rock</button>
+        <button id="paper"><i class="far fa-hand-paper"></i><br>Paper</button>
+        <button id="scissors"><i class="far fa-hand-scissors"></i><br>Scissors</button>
+    </div>
+
+
+<div id="result">
+    <p id="textResult">Start</p>
+    <p class="scoreBoard">Player: <span id="scorePlayer">0</span></p>
+    <p class="scoreBoard">Computer: <span  id="scoreComputer">0</span></p>
+    
+</div>
+
+
     <script>
+
+const rockBtn = document.querySelector("#rock") 
+const paperBtn = document.querySelector("#paper") 
+const scissorsBtn = document.querySelector("#scissors") 
+const result = document.querySelector("#result")
+const textResult = document.querySelector("#textResult")
+
+const playerScoreView = document.querySelector("#scorePlayer")
+const computerScoreView = document.querySelector("#scoreComputer")
+
+
+
+rockBtn.addEventListener("click", () => {playGame("rock", computerPlay())})
+paperBtn.addEventListener("click", () => {playGame("paper", computerPlay())})
+scissorsBtn.addEventListener("click", () => {playGame("scissors", computerPlay())})
+
+
+function checkIfGameOver() {
+    if (playerScore === 5 || computerScore === 5 ) {
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+
+        // textResult.style.cssText = "color: red ; font-size: 20px"
+        textResult.textContent = `${playerScore === 5 ? "PLAYER" : "COMPUTER"} WINS THE GAME!`   
+    }
+}
+
 function upperCaseFirstLetter(str) {
     return str[0].toUpperCase() + str.substring(1, str.length).toLowerCase()
 }
 
 function computerPlay() {
+    console.log("cmpplay")
+    let res = ""
     let moves = ["rock", "paper", "scissors"]
-    return moves[Math.floor(Math.random() * 3)]
+    res =  moves[Math.floor(Math.random() * 3)]
+    return res
 }
 
+let playerScore = 0
+let computerScore = 0
+
 function playGame(playerSelection, computerSelection) {
-    
+    console.log(2)
 
     if (
         (playerSelection == "rock" && computerSelection == "scissors") || 
         (playerSelection == "paper" && computerSelection == "rock") || 
         (playerSelection == "scissors" && computerSelection == "paper") ) {
-
-        return  `You Win! ${upperCaseFirstLetter(playerSelection)} beats ${upperCaseFirstLetter(computerSelection)}`
+        playerScore++
+        playerScoreView.textContent =  playerScore
+        textResult.textContent = `You Win! ${upperCaseFirstLetter(playerSelection)} beats ${upperCaseFirstLetter(computerSelection)}`
+        checkIfGameOver()
     } else if (
         (computerSelection == "rock" &&  playerSelection == "scissors") || 
         (computerSelection == "paper" &&  playerSelection== "rock") || 
         (computerSelection == "scissors" &&  playerSelection == "paper") ) {
-
-        return  `You Lose! ${upperCaseFirstLetter(computerSelection)} beats ${upperCaseFirstLetter(playerSelection)}`
+        computerScore++
+        computerScoreView.textContent =   computerScore
+        textResult.textContent = `You Lose! ${upperCaseFirstLetter(computerSelection)} beats ${upperCaseFirstLetter(playerSelection)}`
+        checkIfGameOver()
+    
     } else {
-        return "It's a Tie"
+        textResult.textContent = "It's a Tie"
     }
 }
 
-function requestInput() {
-    let playerSelection = prompt("Rock, Paper, Scissor?").toLowerCase()
-    let x = 0
-    do {
-        if ((playerSelection == "rock") || (playerSelection == "paper") || (playerSelection == "scissors")) {
-            x = 1
-            return playerSelection
-        } else {
-            playerSelection = prompt("Your input needs to be: Rock, Paper or Scissors").toLowerCase()
-        }
-    } while(x = 0)
 
-  
-    
-}
+// function requestInput() {
+//     let playerSelection = prompt("Rock, Paper, Scissor?").toLowerCase()
+//     let x = 0
+//     do {
+//         if ((playerSelection == "rock") || (playerSelection == "paper") || (playerSelection == "scissors")) {
+//             x = 1
+//             return playerSelection
+//         } else {
+//             playerSelection = prompt("Your input needs to be: Rock, Paper or Scissors").toLowerCase()
+//         }
+//     } while(x = 0)     
+// }
 
 function game() {
-    let numberOfGames  = 5
+    //let numberOfGames  = 5
     let computerWin = 0;
     let playerWin = 0;
-    for (let i = 0; i < numberOfGames; i++) {
+    // for (let i = 0; i < numberOfGames; i++) {
         let playerSelection = requestInput()
         
         let result = playGame(playerSelection, computerPlay())
@@ -65,8 +120,9 @@ function game() {
         console.log(result)
         
 
-    }
+    // }
     console.log(`Player wins: ${playerWin} rounds. Computer Wins: ${computerWin} rounds.`)
+    playerWin > computerWin ? console.log("Player wins") : playerWin = computerWin ? console.log("Its a draw!") : console.log("Computer is an ass, but wins")
 }
 
 
